@@ -1,16 +1,6 @@
-import * as fetch from 'isomorphic-fetch'
+import fetch from 'node-fetch';
 
 const config = process.env
-
-const OUTLOOK_SCOPES = [
-    'User.Read',
-    'Calendars.ReadWrite',
-    'Contacts.ReadWrite',
-]
-
-const headers = new Headers({
-    'Content-Type': 'application/x-www-form-urlencoded',
-});
 
 export const authorize = async (ctx: any) => {
     ctx.body = JSON.stringify({
@@ -36,17 +26,21 @@ export const token = async (ctx: any) => {
 
     const opts: RequestInit = {
         method: 'POST',
-        headers,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
         mode: 'cors',
         cache: 'default',
         body: urlencode(body),
     }
 
     console.log('PERFORM OUTLOOK FETCH\n', body, opts)
+    const res: any = await fetch(`${config.OUTLOOK_LOGIN_URL}/token`, opts)
+    const json: any = await res.json()
 
-    // const res: any = await fetch(`${config.OUTLOOK_LOGIN_URL}/token`, opts)
-    const res = {body: {foo: 'bar'}}
-    ctx.body = JSON.stringify(res.body)
+    console.log('RECEIVE API RESPONSE', json)
+    ctx.status = res.status
+    ctx.body = JSON.stringify(json)
 }
 
 const urlencode = (obj: { [refId: string]: any }) => {

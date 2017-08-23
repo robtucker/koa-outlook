@@ -15,9 +15,9 @@
 	},
 	"dependencies": {
 		"dotenv": "^4.0.0",
-		"isomorphic-fetch": "^2.2.1",
 		"koa-bodyparser": "^4.2.0",
-		"koa-middlewares": "^6.0.0"
+		"koa-middlewares": "^6.0.0",
+		"node-fetch": "^1.7.2"
 	},
 	"devDependencies": {
 		"@types/chai": "^4.0.4",
@@ -32,6 +32,7 @@
 		"@types/lodash": "^4.14.72",
 		"@types/mocha": "^2.2.42",
 		"@types/node": "^7.0.13",
+		"@types/node-fetch": "^1.6.7",
 		"@types/supertest": "^2.0.3",
 		"babel-jest": "20.0.3",
 		"chai": "^4.1.1",

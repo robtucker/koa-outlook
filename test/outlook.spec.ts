@@ -3,17 +3,17 @@ import * as request from 'supertest';
 
 const host = 'http://localhost:5555';
 
-const expected = 'Welcome to the SmartCalendar API'
+const expected = 'Welcome to the Outlook Auth API'
 
 const validateAuthorizationUrl = (res: any) => {
     console.log('VALIDATE OUTLOOK AUTH', res.body.url)
     expect(res.body.url).to.be.a('string')
 }
 
-describe('/outlook/authorize', function() {
+describe('/authorize', function() {
     it('returns an authorization url', function(done: (err?: any) => any) {
         request(host)
-            .get('outlook/authorize')
+            .get('/authorize')
             .expect(200)
             .expect(validateAuthorizationUrl)
             .end((err, res) => done(err))
