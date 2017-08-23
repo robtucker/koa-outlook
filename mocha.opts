@@ -1,0 +1,4 @@
+--timeout 4000
+--compilers ts:ts-node/register
+--watch-extensions ts
+test/app.spec.ts
