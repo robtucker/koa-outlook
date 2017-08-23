@@ -8,7 +8,8 @@ export const authorize = async (ctx: any) => {
         `client_id=${config.OUTLOOK_CLIENT_ID}` +
         `&response_type=${config.OUTLOOK_RESPONSE_TYPE}` +
         `&redirect_uri=${encodeURIComponent(config.OUTLOOK_REDIRECT_URL)}` +
-        `&scope=${config.OUTLOOK_SCOPES}&response_mode=fragment`,
+        `&scope=${encodeURIComponent(config.OUTLOOK_SCOPES.split(',').join(' '))}` +
+        `&response_mode=fragment`,
     })
 }
 
@@ -45,12 +46,9 @@ export const token = async (ctx: any) => {
 
 const urlencode = (obj: { [refId: string]: any }) => {
     const keys = Object.keys(obj)
-
-    return keys.reduce(
-        (acc: any, curr: string, idx: number) => {
-            console.log('REDUCE CURRENT', acc, curr)
-            return `${obj[curr]}${keys.length === idx ? '' : '&'}`
-        },
-        '',
-    )
+    let res: string = ''
+    for (let prop in obj) {
+        res += `${prop}=${obj[prop]}&`
+    }
+    return res.slice(0, res.length -1)
 }
