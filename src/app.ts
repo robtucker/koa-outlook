@@ -2,7 +2,7 @@
 'use strict';
 
 import { config } from 'dotenv'
-
+import * as cors from 'kcors'
 // save the .env file in process.env
 config()
 
@@ -12,7 +12,8 @@ import router from './router'
 
 const app = new Koa();
 
-app.use(bodyParser())
+app.use(cors())
+    .use(bodyParser())
     .use(router.routes())
     .use(router.allowedMethods());
 

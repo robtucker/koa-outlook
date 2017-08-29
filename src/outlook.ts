@@ -47,8 +47,8 @@ export const token = async (ctx: any) => {
 const urlencode = (obj: { [refId: string]: any }) => {
     const keys = Object.keys(obj)
     let res: string = ''
-    for (let prop in obj) {
+    for (const prop in obj) {
         res += `${prop}=${obj[prop]}&`
     }
-    return res.slice(0, res.length -1)
+    return res.slice(0, res.length - 1)
 }
